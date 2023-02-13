@@ -1,16 +1,10 @@
-import { setCurrency, extractFormData, jobTemplate, errorTemplate, noJobsTemplate } from './utils';
+import { extractFormData, jobTemplate, errorTemplate, noJobsTemplate } from './utils';
 
 class JobSearchClass {
-	constructor(searchFormSelector, jobsListContainerSelector, loadinglementSelector, countryCodeSelector) {
+	constructor(searchFormSelector, jobsListContainerSelector, loadinglementSelector) {
 		this.searchForm = document.querySelector(searchFormSelector);
 		this.jobsListContainer = document.querySelector(jobsListContainerSelector);
 		this.loading = document.querySelector(loadinglementSelector);
-		this.countryCode = document.querySelector(countryCodeSelector);
-	}
-
-	// Method: get the country from select element
-  async getCountryCode () {
-		this.countryCode = 'ca';
 	}
 	
 	// Start loading animation
@@ -30,9 +24,9 @@ class JobSearchClass {
 			this.showLoading();
 			this.jobsListContainer.innerHTML = '';
 	
-			const { location, search } = extractFormData(this.searchForm);
+			const { location, search, country } = extractFormData(this.searchForm);
 			try {
-				const jobData = await fetch(`http://localhost:3000/?country=${this.countryCode}&search=${search}&location=${location}`);
+				const jobData = await fetch(`http://localhost:3000/?country=${country}&search=${search}&location=${location}`);
 				const jobs = await jobData.json();
 				this.jobs = jobs.results;
 				this.hideLoading();

@@ -9,8 +9,16 @@
   <body>
     <div id="app">
       <form action="" id="search-form">
-        <input type="text" name="search" id="" required>
-        <input type="text" name="location" id="" required>
+        <label for="search">Search</label>
+        <input type="text" name="search" id="search" required>
+        <label for='country'>Country</label>
+        <select name='country' id='country'>
+          <option value="ca">Canada</option>
+          <option value="us">United States</option>
+          <option value="gb">United Kingdom</option>
+        </select>
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" required>
         <button type="submit">search</button>
       </form>
       <div class='loading'></div>
