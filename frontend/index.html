@@ -9,12 +9,12 @@
   <body>
     <div id="app">
       <form action="" id="search-form">
-        <input type="text" name="search" id="">
-        <input type="text" name="location" id="">
-        <button type="submit">
+        <input type="text" name="search" id="" required>
+        <input type="text" name="location" id="" required>
+        <button type="submit">search</button>
       </form>
-      <button id="console">console</button>
       <div class='loading'></div>
+      <ul id='jobs-list'></ul>
     </div>
     <script type="module" src="/main.js"></script>
   </body>

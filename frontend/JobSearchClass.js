@@ -1,10 +1,9 @@
-import { setCurrency, extractFormData } from './utils';
-const consoleButton = document.querySelector('#console');
+import { setCurrency, extractFormData, jobTemplate, errorTemplate, noJobsTemplate } from './utils';
 
 class JobSearchClass {
-	constructor(searchFormSelector, resultsContainerSelector, loadinglementSelector, countryCodeSelector) {
+	constructor(searchFormSelector, jobsListContainerSelector, loadinglementSelector, countryCodeSelector) {
 		this.searchForm = document.querySelector(searchFormSelector);
-		this.searchResults = document.querySelector(resultsContainerSelector);
+		this.jobsListContainer = document.querySelector(jobsListContainerSelector);
 		this.loading = document.querySelector(loadinglementSelector);
 		this.countryCode = document.querySelector(countryCodeSelector);
 	}
@@ -29,16 +28,27 @@ class JobSearchClass {
 		this.searchForm.addEventListener('submit', async (e) => {
 			e.preventDefault();
 			this.showLoading();
+			this.jobsListContainer.innerHTML = '';
+	
 			const { location, search } = extractFormData(this.searchForm);
-		  const jobData = await fetch(`http://localhost:3000/?country=${this.countryCode}&search=${search}&location=${location}`);
-		  const jobs = await jobData.json();
-		  this.jobs = jobs;
-		  this.hideLoading();
-		   console.log('jobs', this.jobs);
-		// consoleButton.addEventListener('click', () => {
-		// 	console.log('countryCode', this.countryCode);
-		// 	console.log('jobs', this.jobs);
-		// });
+			try {
+				const jobData = await fetch(`http://localhost:3000/?country=${this.countryCode}&search=${search}&location=${location}`);
+				const jobs = await jobData.json();
+				this.jobs = jobs.results;
+				this.hideLoading();
+
+				if (this.jobs?.length === 0) {
+					noJobsTemplate();
+				} else {
+					this.jobsListContainer.innerHTML = this.jobs.map((job) => jobTemplate(job))
+					                                  .join('');
+				}
+
+				} catch (error) {
+					console.log(error);
+					this.hideLoading();
+				  errorTemplate('Something went wrong');
+				}
 	});
 }
 
