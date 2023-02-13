@@ -9,3 +9,6 @@ export const setCurrency = (country) => {
 	return currencies[country] || '$';
 };
 
+export const  extractFormData = form => Array
+	.from(form.elements)
+	.reduce((acc, { name, value }) => ({ ...acc, [name]: value }), {});
