@@ -12,21 +12,28 @@ const headers = {
 };
 
 const server = http.createServer(async (req, res) => {
-	const parasedURL = url.parse(req.url, true).query;
-	const { search, location, country = 'ca' } = parasedURL;
-	const targetURL = `${config.BASE_URL}/${country.toLowerCase()}/${config.BASE_PARAMS}/&app_id=${config.APP_ID}&app_key=${config.API_KEY}&what=${search}&where=${location}`;
-
+	const parasedURL = url.parse(req.url, true).query; // return an object: { search: 'javascript', location: 'toronto' }
+	const { search, location, country } = parasedURL; // destructure the object and set default value for country
+  
+	console.log(chalk.yellow(`Request: ${JSON.stringify(parasedURL)}`));
+	
+	const targetURL = new URL(`${config.BASE_URL}/${country?.toLowerCase()}/${config.BASE_PARAMS}`);
+	targetURL.searchParams.set('app_id', config.APP_ID);
+	targetURL.searchParams.set('app_key', config.API_KEY);
+  targetURL.searchParams.set('what', search);
+	targetURL.searchParams.set('where', location);
+	
 	if (req.method === 'GET') {
-		console.log(chalk.blueBright(`Request GET: ${JSON.stringify(targetURL)}`));
+		console.log(chalk.bgCyan(`Request GET: ${JSON.stringify(targetURL)}`));
 
 		try {
 			const response = await axios.get(targetURL)
 			res.writeHead(200, headers);
 			res.end(JSON.stringify(response.data));
 		} catch (error) {
-			console.log(chalk.redBright(`Error: ${JSON.stringify(error)}`));
+			console.log(chalk.redBright(`Error: ${JSON.stringify(error.message)}`));
 			res.writeHead(500, headers);
-			res.end(JSON.stringify(error));
+			res.end();
 		}
 
 	}
