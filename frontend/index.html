@@ -4,26 +4,68 @@
     <meta charset="UTF-8" />
     <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Search App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dfd5c56732.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css" />
+    <title>eJob</title>
   </head>
   <body>
-    <div id="app">
-      <form action="" id="search-form">
-        <label for="search">Search</label>
-        <input type="text" name="search" id="search" required>
-        <label for='country'>Country</label>
-        <select name='country' id='country'>
-          <option value="ca">Canada</option>
-          <option value="us">United States</option>
-          <option value="gb">United Kingdom</option>
-        </select>
-        <label for="location">Location</label>
-        <input type="text" name="location" id="location" required>
-        <button type="submit">search</button>
-      </form>
+    <main id="app">
+      <header>
+        <h1>eJob</h1>
+        <form action="" id="search-form">
+          <div class='input-container'>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="search" id="search" placeholder='Job title, keyword...' required>
+          </div>
+          <div class='input-container'>
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" name="location" id="location" placeholder='Province or City' required>
+          </div>
+          <select name='country' id='country'>
+            <option value="ca">Canada</option>
+            <option value="us">United States</option>
+            <option value="gb">United Kingdom</option>
+          </select>
+          <button type="submit">search</button>
+        </form>
+      </header>
       <div class='loading'></div>
-      <ul id='jobs-list'></ul>
-    </div>
+      <ul id='jobs-list'>
+        <li class="job-card">
+          <div class="job-card__header">
+            <div class="job-card__header__info">
+              <h3>title</h3>
+              <p>company name</p>
+              <p>location name</p>
+            </div>
+          </div>
+          <div class="job-card__body">
+            <p>description Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa odio fugit aperiam quia repudiandae, tempore mollitia, veritatis provident impedit quod cum, illo eveniet esse magnam harum beatae sint voluptatum eaque.</p>
+          </div>
+          <div class="job-card__footer">
+            <a href="${job.redirect_url}" target="_blank" rel="noopener noreferrer">Apply</a>
+          </div>
+        </li>
+        <li class="job-card">
+          <div class="job-card__header">
+            <div class="job-card__header__info">
+              <h3>title</h3>
+              <p>company name</p>
+              <p>location name</p>
+            </div>
+          </div>
+          <div class="job-card__body">
+            <p>description Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa odio fugit aperiam quia repudiandae, tempore mollitia, veritatis provident impedit quod cum, illo eveniet esse magnam harum beatae sint voluptatum eaque.</p>
+          </div>
+          <div class="job-card__footer">
+            <a href="${job.redirect_url}" target="_blank" rel="noopener noreferrer">Apply</a>
+          </div>
+        </li>
+      </ul>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
