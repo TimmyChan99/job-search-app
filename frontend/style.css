@@ -96,6 +96,7 @@ button[type="submit"] {
   font-weight: bold;
   cursor: pointer;
   border: none;
+  padding: 5px 20px;
 }
 
 /* Main */
@@ -121,6 +122,12 @@ li {
   background-color: white;
 }
 
+.job-card__header__info h3 {
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
 .job-card__header__info p {
   color: var(--text-color);
 }
@@ -142,3 +149,27 @@ li a {
   color: var(--purple);
   font-weight: bold;
 }
+
+/* media queries */
+@media screen and (width > 768px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 40px;
+  }
+
+  form {
+    flex-direction: row;
+  }
+
+  li {
+    width: 75%;
+  }
+
+  .job-card__header__info h3 {
+    font-size: 1.3rem;
+  }
+  
+}
+
