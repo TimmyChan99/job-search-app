@@ -1,4 +1,4 @@
-import http from 'node:http';
+import http from 'http';
 import url from 'url';
 import axios from 'axios';
 import chalk from 'chalk';
