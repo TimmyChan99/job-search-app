@@ -11,12 +11,12 @@ class JobSearchClass {
 
   // Start loading animation
   showLoading() {
-    this.loading.classList.add('show');
+    this.loading.classList.add('lds-grid');
   }
 
   // Stop loading animation
   hideLoading() {
-    this.loading.classList.remove('show');
+    this.loading.classList.remove('lds-grid');
   }
 
   // Method: get the job data from the backend API
