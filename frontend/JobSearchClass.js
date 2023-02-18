@@ -1,5 +1,5 @@
 import {
-  extractFormData, jobTemplate, errorTemplate, noJobsTemplate,
+  extractFormData, jobTemplate, errorTemplate, noJobsTemplate, BASE_URL,
 } from './utils.js';
 
 class JobSearchClass {
@@ -28,7 +28,7 @@ class JobSearchClass {
 
       const { location, search, country } = extractFormData(this.searchForm);
       try {
-        const jobData = await fetch(`http://localhost:3000/?country=${country}&search=${search}&location=${location}`);
+        const jobData = await fetch(`${BASE_URL}/?country=${country}&search=${search}&location=${location}`);
         const jobs = await jobData.json();
         this.jobs = jobs.results;
         this.hideLoading();
