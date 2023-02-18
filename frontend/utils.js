@@ -49,5 +49,5 @@ export const noJobsTemplate = () => {
 
 // Base URL deplopening environment variables
 export const BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://job-search-app-nu.vercel.app/'
+  ? 'https://job-search-app-nu.vercel.app'
   : 'http://localhost:3000';
